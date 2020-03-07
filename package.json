@@ -1,17 +1,17 @@
 {
   "name": "input-value",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "description": "常见的输入值校验和替换操作，主要针对中国大陆地区的校验规则。",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "input value test","isNum","isInt","isPInt","isNInt","checkIntRange","isTel","isFax",
+    "check input value","isNum","isInt","isPInt","isNInt","checkIntRange","isTel","isFax",
     "isEmail","isQQ","isURL","isIP","isIPv6","isIDCard","isPostCode","same","lengthRange",
     "letterBegin","pureNum","getLIPTypes","pureLIP","clearSpaces","clearCNChars",
     "clearCNCharsAndSpaces","clearPunctuation","haveSpace","haveCNChars"
   ],
   "author": "yangpuxiao",
-  "license": "ISC"
+  "license": "BSD"
 }
