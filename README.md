@@ -18,6 +18,15 @@
 - 绝大多数的方法返回值为 true or false
 - getLIPTypes方法返回值为0-3
 
+## 安装代码
+
+在Nodejs中安装代码
+
+    npm install --save input-value
+
+若您想在浏览器环境中使用，可以从[https://github.com/Puxiao/input-value/blob/master/index.js](https://github.com/Puxiao/input-value/blob/master/index.js) 获取。
+下载index.js，并删除该JS文件中module.exports部分。
+
 
 ## 示例代码
 
@@ -57,7 +66,7 @@
 
 - maxInt：在取值范围中，最大的整数，若不设置则表示不限制
 
-- punctuation：除空格外的其他英文标点符号集：~`!@#$%^&*()-_+=\[]{};:"\',<.>/?。  若需自定义符号集，例如“仅包含中划线和下划线”，将参数设置为"\-\_"即可。
+- punctuation：除空格外的其他英文标点符号集：~\`!@#$%^&*()-_+=\[]{};:"\',<.>/?。  若需自定义符号集，例如“仅包含中划线和下划线”，将参数设置为"\-\_"即可。
 
 
 ## 全部方法(API)
@@ -109,7 +118,7 @@
 校验是否为非零的正整数。 参数使用方法和isInt()相同。
 
 
-#### isNInt(value,minLength=null,maxLength=undefined)
+### isNInt(value,minLength=null,maxLength=undefined)
 
 校验是否为非零的负整数。 参数使用方法和isInt()相同。
 
@@ -360,7 +369,7 @@ LIP缩写的由来：L(letter 字母) + I(uint 数字) + P(punctuation 标点符
     console.log(valuetest.getLIPTypes('abc123')); //2  
     console.log(valuetest.getLIPTypes('abc123=?')); //3  
 
-    console.log(valuetest.getLIPTypes('abc123=?','\-\_')); //2  第2个参数'\-\_'表明可接受的标点符号仅为\-\_，而=?不在此范围里  
+    console.log(valuetest.getLIPTypes('abc123=?','-_')); //2  第2个参数'-_'表明可接受的标点符号仅为-_，而=?不在此范围里  
 
 
 ### pureLIP(str,num=1,punctuation=null)
