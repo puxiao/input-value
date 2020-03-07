@@ -62,7 +62,7 @@
 
 ## 全部方法(API)
 
-#### isNum(value,floats=null)
+### isNum(value,floats=null)
 
 校验是否为一个数字，以及该数字小数点位数是否与参数floats一致。
 
@@ -83,7 +83,7 @@
     console.log(valuetest.isNum(2.0,1)); //false  
 
 
-#### isInt(value,minLength=null,maxLength=undefined)
+### isInt(value,minLength=null,maxLength=undefined)
 
 校验是否为一个整数。
 
@@ -104,7 +104,7 @@
     console.log(valuetest.isInt(123,1,4)); //true  
 
 
-#### isPInt(value,minLength=null,maxLength=undefined)
+### isPInt(value,minLength=null,maxLength=undefined)
 
 校验是否为非零的正整数。 参数使用方法和isInt()相同。
 
@@ -114,7 +114,7 @@
 校验是否为非零的负整数。 参数使用方法和isInt()相同。
 
 
-#### checkIntRange(value,minInt,maxInt=9007199254740991)
+### checkIntRange(value,minInt,maxInt=9007199254740991)
 
 校验整数是否在取值范围内。
 
@@ -131,7 +131,7 @@
     console.log(valuetest.checkIntRange(2,1,3)); //true  
 
 
-#### isTel(value)
+### isTel(value)
 
 校验是否为中国大陆手机号。 参数value可以是数字或字符串。
 
@@ -147,7 +147,7 @@
     console.log(valuetest.isTel('11000000000')); //false  
 
 
-#### isFax(str)
+### isFax(str)
 
 校验是否为中国大陆传真或固定电话号码。 
 
@@ -166,7 +166,7 @@
     console.log(valuetest.isFax('012-8888888')); //true  
 
 
-#### isEmail(str)
+### isEmail(str)
 
 校验是否为邮箱地址
 
@@ -183,7 +183,7 @@
     console.log(valuetest.isEmail('xx@ab.cd.xx')); //true  
 
 
-#### isQQ(value)
+### isQQ(value)
 
 校验是否为QQ号码。 参数value为数字或字符串
 
@@ -199,7 +199,7 @@
     console.log(valuetest.isQQ('12345678901234')); //false  
 
 
-#### isURL(str)
+### isURL(str)
 
 校验是否为网址。
 
@@ -215,7 +215,7 @@
     console.log(valuetest.isURL('puxiao.com')); //true  
     console.log(valuetest.isURL('https://www.puxiao.com/mynpm/index.html?url=https://npmjs.com')); //true  
 
-#### isIP(str)
+### isIP(str)
 
 校验是否为不含端口号的IP地址。
 
@@ -230,7 +230,7 @@
     console.log(valuetest.isIP('256.02.0.0')); //false 256和02均不在允许范围内  
 
 
-#### isIPv6(str)
+### isIPv6(str)
 
 校验是否为IPv6地址。
 
@@ -246,7 +246,7 @@
     console.log(valuetest.isIPv6('2001:0410::FB00:1400:5000:45FF')); //true  
 
 
-#### isIDCard(str)
+### isIDCard(str)
 
 校验是否为中国大陆第二代居民身份证。
 
@@ -262,7 +262,7 @@
     console.log(valuetest.isIDCard('410000179913320000')); //false 出生年月日不符合校验规则  
 
 
-#### isPostCode(value)
+### isPostCode(value)
 
 校验是否为中国大陆邮政编码。 参数value为数字或字符串
 
@@ -276,7 +276,7 @@
     console.log(valuetest.isPostCode('12345')); //false 必须为6位  
 
 
-#### same(firstValue,secondValue)
+### same(firstValue,secondValue)
 
 校验两个参数是否完全相同，包括类型。
 
@@ -290,7 +290,7 @@
     console.log(valuetest.same(2,'2')); //false 数据类型不同  
 
 
-#### lengthRange(str,minLength,maxLength=9007199254740991)
+### lengthRange(str,minLength,maxLength=9007199254740991)
 
 校验字符的长度是否在规定的范围内。 
 
@@ -307,7 +307,7 @@
     console.log(valuetest.lengthRange('abcd',3,5)); //true  字符长度需>=3、<=5  
 
 
-#### letterBegin(str)
+### letterBegin(str)
 
 校验字符是否以字母开头。
 
@@ -323,7 +323,7 @@
     console.log(valuetest.letterBegin('0abc')); //false  
 
 
-#### pureNum(str)
+### pureNum(str)
 
 校验字符是否为纯数字(整数)。
 
@@ -339,7 +339,7 @@
     console.log(valuetest.pureNum('01a23')); //false  
 
 
-#### getLIPTypes(str,punctuation=null)
+### getLIPTypes(str,punctuation=null)
 
 返回字符串构成种类(字母，数字，标点符号)的数量。 
 
@@ -351,7 +351,7 @@ LIP缩写的由来：L(letter 字母) + I(uint 数字) + P(punctuation 标点符
 
 - 若需自定义符号集，例如“仅包含中划线和下划线”，将参数设置为"\-\_"即可
 
-- **若不传值或默认为null，则内部默认标点符号集为除空格外的其他英文标点符号：~`!@#$%^&*()-_+=\[]{};:"\',<.>/?**
+- **若不传值或默认为null，则内部默认标点符号集为除空格外的其他英文标点符号：~\`!@#$%^&*()-_+=\[]{};:"\',<.>/?**
 
 示例代码：
 
@@ -363,7 +363,7 @@ LIP缩写的由来：L(letter 字母) + I(uint 数字) + P(punctuation 标点符
     console.log(valuetest.getLIPTypes('abc123=?','\-\_')); //2  第2个参数'\-\_'表明可接受的标点符号仅为\-\_，而=?不在此范围里  
 
 
-#### pureLIP(str,num=1,punctuation=null)
+### pureLIP(str,num=1,punctuation=null)
 
 校验字符串构成的种类数量是否大于或等于参数num的值。 通常用来校验用户设置的密码复杂程度。
 
@@ -385,7 +385,7 @@ LIP缩写的由来：L(letter 字母) + I(uint 数字) + P(punctuation 标点符
     console.log(valuetest.pureLIP('abc123=',3,'-_')); //false  由于传递参数中可接受标点符号仅为'-_'，而'='不在此范围内 
 
 
-#### clearSpaces(str)
+### clearSpaces(str)
 清除所有空格。
 
 示例代码：
@@ -394,7 +394,7 @@ LIP缩写的由来：L(letter 字母) + I(uint 数字) + P(punctuation 标点符
     console.log(valuetest.clearSpaces(' a bc  ')); //abc  
 
 
-#### clearCNChars(str)
+### clearCNChars(str)
 清除所有中文字符(包括中文标点符号)。
 
 示例代码：
@@ -403,7 +403,7 @@ LIP缩写的由来：L(letter 字母) + I(uint 数字) + P(punctuation 标点符
     console.log(valuetest.clearCNChars('abc杨')); //abc  
 
 
-#### clearCNCharsAndSpaces(str)
+### clearCNCharsAndSpaces(str)
 清除所有中文字符及空格。
 
 示例代码：
@@ -412,8 +412,8 @@ LIP缩写的由来：L(letter 字母) + I(uint 数字) + P(punctuation 标点符
     console.log(valuetest.clearCNCharsAndSpaces(' a b c杨  ')); //abc  
 
 
-#### clearPunctuation(str,excludePunctuation=null)
-除保留标点符号集以外，清除其他所有英文的标点符号(含空格)。 全部英文标点符号为： ~`!@#$%^&*()-_+=\[]{};:"\',<.>/?
+### clearPunctuation(str,excludePunctuation=null)
+除保留标点符号集以外，清除其他所有英文的标点符号(含空格)。 全部英文标点符号为： ~\`!@#$%^&*()-_+=\[]{};:"\',<.>/?
 
 参数excludePunctuation指需要保留的标点符号集，例如若传递的值为'\_'，即表示清除_以外的其他所有英文标点符号。
 
@@ -424,7 +424,7 @@ LIP缩写的由来：L(letter 字母) + I(uint 数字) + P(punctuation 标点符
     console.log(valuetest.clearPunctuation(' a b c, _ ?','_')); //abc_ 清除_以外的其他全部标点符号(含空格)  
 
 
-#### haveSpace(str)
+### haveSpace(str)
 校验是否包含空格。
 
 示例代码：
@@ -434,7 +434,7 @@ LIP缩写的由来：L(letter 字母) + I(uint 数字) + P(punctuation 标点符
     console.log(valuetest.haveSpace('abc')); //false  
 
 
-#### haveCNChars(str)
+### haveCNChars(str)
 校验是否包含中文字符(包括中文标点符号)。
 
 示例代码：
