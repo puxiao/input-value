@@ -24,7 +24,7 @@
 
     npm install --save input-value
 
-若您想在浏览器环境中使用，可以从[https://github.com/Puxiao/input-value/blob/master/index.js](https://github.com/Puxiao/input-value/blob/master/index.js) 获取。
+若您想在浏览器环境中使用，可以从[https://github.com/puxiao/input-value/blob/master/index.js](https://github.com/puxiao/input-value/blob/master/index.js) 获取。
 下载index.js，并删除该JS文件中module.exports部分。
 
 
