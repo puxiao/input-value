@@ -113,7 +113,7 @@ function pureNum(str) {
 function anysicPunctuation(str){
     if(!str) return null;
     let arr = str.split('').map(item => {
-        return item = '\\' + item;
+        return '\\' + item;
     });
     return arr.join('|');
 }
