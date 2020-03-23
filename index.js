@@ -105,6 +105,29 @@ function letterBegin(str){
     return /^[A-z]/.test(str);
 }
 
+function startByLetter(str){
+    if(!str) return false;
+    return /^[A-z]/.test(str);
+}
+
+function startBy(str,keyword,escape=true){
+    if(!str && !keyword) return false;
+    if(escape){
+        keyword = keyword.replace(/[\ \~\`\!\@\#\$\%\^\&\*\(\)\-\_\+\=\\\[\]\{\}\;\:\"\'\,\<\.\>\/\?]/g,'\\$&');
+    }
+    let regexp = new RegExp(`^${escape?`(${keyword})`:keyword}`);
+    return regexp.test(str);
+}
+
+function endBy(str,keyword,escape=true){
+    if(!str && !keyword) return false;
+    if(escape){
+        keyword = keyword.replace(/[\ \~\`\!\@\#\$\%\^\&\*\(\)\-\_\+\=\\\[\]\{\}\;\:\"\'\,\<\.\>\/\?]/g,'\\$&');
+    }
+    let regexp = new RegExp(`${escape?`(${keyword})`:keyword}$`);
+    return regexp.test(str);
+}
+
 function pureNum(str) {
     if(!str) return false;
     return /^[0-9]*$/.test(str);
@@ -173,7 +196,7 @@ function haveCNChars(str){
 module.exports = {
     isNum,isInt,isPInt,isNInt,checkIntRange,
     isTel,isFax,isEmail,isQQ,isURL,isIP,isIPv6,isIDCard,isPostCode,
-    same,lengthRange,letterBegin,pureNum,getLIPTypes,pureLIP,
+    same,lengthRange,letterBegin,startByLetter,startBy,endBy,pureNum,getLIPTypes,pureLIP,
     clearSpaces,clearCNChars,clearCNCharsAndSpaces,clearPunctuation,
     haveSpace,haveCNChars
 }
