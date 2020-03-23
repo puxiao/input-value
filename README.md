@@ -9,7 +9,7 @@
 
     - isNum,isInt,isPInt,isNInt,checkIntRange
     - isTel,isFax,isEmail,isQQ,isURL,isIP,isIPv6,isIDCard,isPostCode
-    - same,lengthRange,letterBegin,pureNum,getLIPTypes,pureLIP
+    - same,lengthRange,startByLetter,startBy,endBy,pureNum,getLIPTypes,pureLIP
     - clearSpaces,clearCNChars,clearCNCharsAndSpaces,clearPunctuation,
     - haveSpace,haveCNChars
 
@@ -66,7 +66,7 @@
 
 - maxInt：在取值范围中，最大的整数，若不设置则表示不限制
 
-- punctuation：除空格外的其他英文标点符号集：~\`!@#$%^&*()-_+=\[]{};:"\',<.>/?。  若需自定义符号集，例如“仅包含中划线和下划线”，将参数设置为"\-\_"即可。
+- punctuation：除空格外的其他英文标点符号集：~\`!@#$%^&*()-_+=\\[]{};:"\',<.>/?。  若需自定义符号集，例如“仅包含中划线和下划线”，将参数设置为"\-\_"即可。
 
 
 ## 全部方法(API)
@@ -318,6 +318,10 @@
 
 ### letterBegin(str)
 
+v0.1.10版本以后不推荐使用，建议使用startByLetter()。
+
+### startByLetter(str)
+
 校验字符是否以字母开头。
 
 校验规则：
@@ -328,8 +332,109 @@
 示例代码：
 
     const valuetest = require('input-value');  
-    console.log(valuetest.letterBegin('abc')); //true  
-    console.log(valuetest.letterBegin('0abc')); //false  
+    console.log(valuetest.startByLetter('abc')); //true  
+    console.log(valuetest.startByLetter('0abc')); //false  
+
+### startBy(str,keyword,escape=true)
+
+校验字符是否以某字符串开头。
+
+参数说明：
+
+- 参数keyword为“开头字符串”，字符串中若出现“|”则表示“或”，例如keyword = "admin|user"表示“admin或user”。
+
+- 参数escape表示是否需要对keyword中的标点符号进行转义，默认为true。
+
+- 若参数escape=false，则不进行转义，那么此时keyword可以是字符串，也可以是正则表达式(不需要前后添加/)。 
+
+- 若参数keyword为纯字母或数字，不包含任何标点符号，那么无论escape是否为true，都不会影响最终校验结果。
+
+
+补充说明：
+
+- 这里的标点符号转义并不是使用JavaScript中默认函数escape()进行转义。
+
+- 执行转义的标点符号有(含空格)： ~`!@#$%^&*()-_+=\\[]{};:"',<.>/?，请注意“|”并不会进行转义。
+
+示例代码 1：
+
+    const valuetest = require('input-value');
+    
+    let str = '/admin/login.html';
+    
+    console.log(valuetest.startBy(str,'/admin')); //true
+    console.log(valuetest.startBy(str,'admin')); //false
+    console.log(valuetest.startBy(str,'user')); //false
+    console.log(valuetest.startBy(str,'/admin|/user')); //true 校验是否以/admin或/user开头
+
+示例代码 2：
+
+    const valuetest = require('input-value');
+
+    let str = '/admin/login.html';
+    
+    console.log(valuetest.startBy(str,'/admin',false)); //true
+    
+    //在正则表达式中，各种标点符号具有自身的含义，例如“.”代表 匹配除换行符 \n之外的任何单字符。
+    console.log(valuetest.startBy(str,'.admin',false));  //true
+    //上述代码返回结果为true，是因为没有对符号.进行转义，这里的“.”匹配除换行符 \n之外的任何单字符。
+    
+    console.log(valuetest.startBy(str,'\\.admin',false)); //false
+    //通过对keyword中点.进行转义，这次结果符合我们的预期。
+
+    //如果没有特殊需求，不建议设置escape=false，除非您有自己特殊的匹配规则，比如要匹配字符串“|”。
+
+
+### function endBy(str,keyword,escape=true)
+
+校验字符是否以某字符串结束。
+
+参数说明：
+
+- 参数keyword为“结束字符串”，字符串中若出现“|”则表示“或”，例如keyword = ".css|.jpg"表示“.css或.jpg”。
+
+- 参数escape表示是否需要对keyword中的标点符号进行转义，默认为true。
+
+- 若参数escape=false，则不进行转义，那么此时keyword可以是字符串，也可以是正则表达式(不需要前后添加/)。 
+
+- 若参数keyword为纯字母或数字，不包含任何标点符号，那么无论escape是否为true，都不会影响最终校验结果。
+
+
+补充说明：
+
+- 这里的标点符号转义并不是使用JavaScript中默认函数escape()进行转义。
+
+- 执行转义的标点符号有(含空格)： ~`!@#$%^&*()-_+=\\[]{};:"',<.>/?，请注意“|”并不会进行转义。
+
+示例代码 1：
+
+    const valuetest = require('input-value');
+
+    let str = '/css/base.css';
+    let str2 = '/css/base.css.jpg';
+    
+    console.log(valuetest.endBy(str,'.css')); //true
+    console.log(valuetest.endBy(str,'.css|.jpg')); //true 校验是否以.css或.jpg结尾
+    
+    console.log(valuetest.endBy(str2,'.css')); //false
+    console.log(valuetest.endBy(str2,'.jpg')); //true
+
+示例代码 2:
+
+    const valuetest = require('input-value');
+
+    let str = '/css/basecss';//请注意css前面没有"."
+    
+    console.log(valuetest.endBy(str,'css',false)); //true
+    
+    //在正则表达式中，各种标点符号具有自身的含义，例如“.”代表 匹配除换行符 \n之外的任何单字符。
+    console.log(valuetest.endBy(str,'.css',false)); //true
+    //上述代码返回结果为true，是因为没有对符号.进行转义，这里的“.”匹配除换行符 \n之外的任何单字符。
+    
+    //通过对keyword中点.进行转义，这次结果符合我们的预期。
+    console.log(valuetest.endBy(str,'\\.css',false)); //false
+    
+    //如果没有特殊需求，不建议设置escape=false，除非您有自己特殊的匹配规则，比如要标点符号“.*”等拥有特殊含义。
 
 
 ### pureNum(str)
@@ -360,7 +465,7 @@ LIP缩写的由来：L(letter 字母) + I(uint 数字) + P(punctuation 标点符
 
 - 若需自定义符号集，例如“仅包含中划线和下划线”，将参数设置为"\-\_"即可
 
-- **若不传值或默认为null，则内部默认标点符号集为除空格外的其他英文标点符号：~\`!@#$%^&*()-_+=\[]{};:"\',<.>/?**
+- **若不传值或默认为null，则内部默认标点符号集为除空格外的其他英文标点符号：~\`!@#$%^&*()-_+=|\[]{};:"\',<.>/?**
 
 示例代码：
 
@@ -422,7 +527,7 @@ LIP缩写的由来：L(letter 字母) + I(uint 数字) + P(punctuation 标点符
 
 
 ### clearPunctuation(str,excludePunctuation=null)
-除保留标点符号集以外，清除其他所有英文的标点符号(含空格)。 全部英文标点符号为： ~\`!@#$%^&*()-_+=\[]{};:"\',<.>/?
+除保留标点符号集以外，清除其他所有英文的标点符号(含空格)。 全部英文标点符号为： ~\`!@#$%^&*()-_+=|\\[]{};:"\',<.>/?
 
 参数excludePunctuation指需要保留的标点符号集，例如若传递的值为'\_'，即表示清除_以外的其他所有英文标点符号。
 
