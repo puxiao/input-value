@@ -385,7 +385,7 @@ v0.1.10版本以后不推荐使用，建议使用startByLetter()。
     //如果没有特殊需求，不建议设置escape=false，除非您有自己特殊的匹配规则，比如要匹配字符串“|”。
 
 
-### function endBy(str,keyword,escape=true)
+### endBy(str,keyword,escape=true)
 
 校验字符是否以某字符串结束。
 
